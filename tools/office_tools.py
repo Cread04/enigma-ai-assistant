@@ -56,7 +56,7 @@ def create_notes_document(content: str, filename: str = "Anteckningar"):
     try:
         import time
         
-        # Säkerställ filnamn
+        # secure the filename
         if not filename.endswith(".docx"):
             filename += ".docx"
         

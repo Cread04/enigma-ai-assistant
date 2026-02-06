@@ -3,12 +3,10 @@ import threading
 import math
 import time
 from PIL import Image, ImageTk
-
-# Importera dina systemfiler
 from agent import get_agent
 from Voice import listen, speak
 
-# --- UTSEENDE ---
+# The look
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("dark-blue")
 
@@ -222,7 +220,7 @@ class EnigmaUI(ctk.CTk):
                             self.last_help_offered is None or 
                             (current_time - self.last_help_offered) > self.help_offer_cooldown):
                             
-                            # Erbjud hjälp baserat på aktivitet med voice
+                            # Give help based on detected activity
                             if activity == "research":
                                 message = "Jag ser att du forskar på en hemsida. Vill du att jag skriver ner eller organiserar information om det du läser?"
                                 self.log_to_chat("ENIGMA", message)
@@ -236,7 +234,7 @@ class EnigmaUI(ctk.CTk):
                                 self.log_to_chat("ENIGMA", message)
                                 threading.Thread(target=speak, args=(message,), daemon=True).start()
                             
-                            # Logga detekterad text (första 100 tecken)
+                            # Logg detected words (first 100 characters)
                             text_preview = result.get("text", "")[:100]
                             if text_preview:
                                 print(f"DEBUG: Detected {activity}: {text_preview}...", flush=True)
